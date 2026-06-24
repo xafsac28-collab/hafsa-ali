@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>iPhone Calculator</title>
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:Arial, sans-serif;
+}
+
+body{
+  background:#000;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  height:100vh;
+}
+
+.calculator{
+  width:350px;
+  padding:20px;
+}
+
+#display{
+  width:100%;
+  height:100px;
+  border:none;
+  background:#000;
+  color:#fff;
+  text-align:right;
+  font-size:60px;
+  padding:10px;
+  outline:none;
+}
+
+.buttons{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:12px;
+}
+
+button{
+  width:75px;
+  height:75px;
+  border:none;
+  border-radius:50%;
+  font-size:28px;
+  cursor:pointer;
+}
+
+.gray{
+  background:#a5a5a5;
+  color:black;
+}
+
+.dark{
+  background:#333;
+  color:white;
+}
+
+.orange{
+  background:#ff9f0a;
+  color:white;
+}
+
+.zero{
+  grid-column:span 2;
+  width:162px;
+  border-radius:40px;
+  text-align:left;
+  padding-left:30px;
+}
+</style>
+</head>
+<body>
+
+<div class="calculator">
+
+<input type="text" id="display" readonly>
+
+<div class="buttons">
+
+<button class="gray" onclick="clearDisplay()">AC</button>
+<button class="gray" onclick="append('%')">%</button>
+<button class="gray" onclick="append('/')">÷</button>
+<button class="orange" onclick="append('/')">÷</button>
+
+<button class="dark" onclick="append('7')">7</button>
+<button class="dark" onclick="append('8')">8</button>
+<button class="dark" onclick="append('9')">9</button>
+<button class="orange" onclick="append('*')">×</button>
+
+<button class="dark" onclick="append('4')">4</button>
+<button class="dark" onclick="append('5')">5</button>
+<button class="dark" onclick="append('6')">6</button>
+<button class="orange" onclick="append('-')">−</button>
+
+<button class="dark" onclick="append('1')">1</button>
+<button class="dark" onclick="append('2')">2</button>
+<button class="dark" onclick="append('3')">3</button>
+<button class="orange" onclick="append('+')">+</button>
+
+<button class="dark zero" onclick="append('0')">0</button>
+<button class="dark" onclick="append('.')">.</button>
+<button class="orange" onclick="calculate()">=</button>
+
+</div>
+
+</div>
+
+<script>
+const display = document.getElementById("display");
+
+function append(value){
+  display.value += value;
+}
+
+function clearDisplay(){
+  display.value = "";
+}
+
+function calculate(){
+  try{
+    display.value = Function("return " + display.value)();
+  }catch{
+    display.value = "Error";
+  }
+}
+</script>
+
+</body>
+</html>
